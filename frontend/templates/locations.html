@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="list-header">
+  <h2>Locations</h2>
+  <a class="btn btn-success" href="{{ url_for('add_location') }}">Add Location</a>
+</div>
+<div class="grid">
+  {% for l in locations %}
+  <div class="card">
+    <div class="card-title">{{ l.name }}</div>
+    <div class="muted">ID: {{ l.location_id }}</div>
+    <form method="POST" action="{{ url_for('delete_location', location_id=l.location_id) }}" onsubmit="return confirm('Delete location?');">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+  {% else %}
+  <div class="empty">No locations found</div>
+  {% endfor %}
+</div>
+{% endblock %}

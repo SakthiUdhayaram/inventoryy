@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="list-header">
+  <h2>Movements</h2>
+  <a class="btn btn-success" href="{{ url_for('add_movement') }}">Add Movement</a>
+</div>
+<div class="grid">
+  {% for m in movements %}
+  <div class="card movement-card">
+    <div><strong>ID:</strong> {{ m.movement_id }}</div>
+    <div><strong>Product:</strong> {{ m.product_id }}</div>
+    <div><strong>From:</strong> {{ m.from_location or '-' }}</div>
+    <div><strong>To:</strong> {{ m.to_location or '-' }}</div>
+    <div><strong>Qty:</strong> {{ m.qty }}</div>
+    <div class="muted">{{ m.timestamp.strftime('%Y-%m-%d %H:%M') }}</div>
+    <form method="POST" action="{{ url_for('delete_movement', movement_id=m.movement_id) }}" onsubmit="return confirm('Delete movement?');">
+      <button class="btn btn-danger">Delete</button>
+    </form>
+  </div>
+  {% else %}
+  <div class="empty">No movements recorded</div>
+  {% endfor %}
+</div>
+{% endblock %}

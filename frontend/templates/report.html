@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="list-header">
+  <h2>Inventory Report</h2>
+</div>
+<div class="grid">
+  {% for row in balances %}
+  <div class="card report-card">
+    <div class="card-title">{{ row.product }}</div>
+    <div class="muted">Location: {{ row.location }}</div>
+    <div class="big">{{ row.qty }}</div>
+  </div>
+  {% else %}
+  <div class="empty">No inventory data found</div>
+  {% endfor %}
+</div>
+{% endblock %}
